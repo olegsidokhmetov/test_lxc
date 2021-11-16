@@ -1,0 +1,4 @@
+    - replace:
+        path: /etc/jitsi/videobridge/sip-communicator.properties
+        regexp: 'shard'
+        replace: 'shard-1'

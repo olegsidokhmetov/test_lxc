@@ -1,0 +1,27 @@
+---
+- hosts: jitsi
+  become: true
+  vars:
+    plus_1: 1
+    word: shard
+  tasks:
+
+    - name: El siguiente numero de shard 
+      shell: |
+        siguiente_shard=$(expr 1 + $(grep 'shard-' /etc/jitsi/videobridge/sip-communicator.properties | awk -F '.' '{print $6}' |uniq | sort | tail -n1 | cut -d '-' -f2 | xargs printf "%d" ))
+        echo $siguiente_shard
+      register: echo
+
+    - debug:
+        var: echo.stdout_lines
+
+    # - shell: echo $siguiente_shard
+    #   register: echo
+
+
+    # - name: do the math
+    #   set_fact:
+    #     first_count: "{{ first_var - second_var }}"
+
+    # # - debug:
+    # #     msg: "{{ siguiente_shard.stderr }}"

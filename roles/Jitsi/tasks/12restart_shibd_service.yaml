@@ -1,0 +1,4 @@
+    - name: Restart shibd service.
+      systemd:
+        name: shibd 
+        state: restarted

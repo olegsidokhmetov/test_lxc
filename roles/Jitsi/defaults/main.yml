@@ -1,0 +1,5 @@
+---
+
+jitsi_meet_ssl_cert_path: ssl/js.quersys.com.crt
+jitsi_meet_ssl_key_path: ssl/js.quersys.com.key
+jitsi_meet_watermark_file: logo/quersystem-logo.png

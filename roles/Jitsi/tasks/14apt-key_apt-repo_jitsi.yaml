@@ -1,0 +1,8 @@
+    - name: "Add apt-key for jitsi"
+      apt_key:
+        url: https://download.jitsi.org/jitsi-key.gpg.key
+        state: present
+
+    - apt_repository:
+        repo: "deb https://download.jitsi.org stable/"
+        state: present

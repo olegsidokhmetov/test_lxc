@@ -1,0 +1,30 @@
+    - name: Creates directory "/home/scripts" #increase number of shard plus 1, for example, from shard-1 to shard-2
+      file:
+        path: /home/scripts
+        state: directory
+
+    - name: Creating a new script file
+      copy:
+        dest: "/home/scripts/shard_server_number"
+        content: |
+          #!/bin/bash
+          DPATH="/etc/jitsi/videobridge/sip-communicator.properties"
+          set -x
+          k=$(grep -o -E 'shard-[0-9]+' $DPATH | sort -u) #shard ends by a number
+          i=$(grep -o -E 'shard-[0-9]+' $DPATH | sort -u | cut -c7)
+          m=$((i+1))
+          n="shard-$m"
+          sed -i "s|${k}|${n}|g" $DPATH
+
+    - debug: msg="Running test app through Ansible shell module..."
+
+    - name: Set executable for file "shard_server_number"
+      file:
+        dest: /home/scripts/shard_server_number
+        mode: '+x'
+
+    - name: This command will start bash script 
+      shell: "/home/scripts/shard_server_number"
+      args:
+        chdir: "/home/scripts/"
+        executable: "/bin/bash"

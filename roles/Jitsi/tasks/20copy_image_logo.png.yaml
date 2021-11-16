@@ -1,0 +1,5 @@
+    - name: Copy files quersystem-logo.png
+      copy:
+        src: /etc/ansible/roles/Jitsi/files/logo/quersystem-logo.png
+        dest: /usr/share/jitsi-meet/images/watermark.png
+        remote_src: false

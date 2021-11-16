@@ -1,0 +1,5 @@
+    - name: Create symbolic links "js.quersys.com.conf"
+      file:
+        src: /etc/apache2/sites-available/js.quersys.com.conf
+        dest: /etc/apache2/sites-enabled/js.quersys.com.conf
+        state: link

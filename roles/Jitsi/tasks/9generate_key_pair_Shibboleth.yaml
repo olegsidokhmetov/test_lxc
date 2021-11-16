@@ -1,0 +1,5 @@
+    - name: Generate a key pair for a Shibboleth sp-signing
+      shell: /usr/sbin/shib-keygen -u _shibd -g _shibd -h js.quersys.com -y 10 -e https://js.quersys.com/shibboleth -n sp-signing
+
+    - name: Generate a key pair for a Shibboleth sp-encrypt
+      shell: /usr/sbin/shib-keygen -u _shibd -g _shibd -h js.quersys.com -y 10 -e https://js.quersys.com/shibboleth -n sp-encrypt
