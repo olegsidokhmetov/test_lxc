@@ -44,25 +44,12 @@
 
 [jitsi_server]
 jitsi ansible_host=80.78.244.214
-#jitsi_backup ansible_host=80.78.244.214
 
 [jitsi_jvbs]
 jvb1 ansible_host=89.108.78.209
-##jvb2 ansible_host=89.108.78.209
-##jvb3 ansible_host=89.108.78.209
-
-[videobridge:children]
-jitsi_server
-jitsi_jvb1
 
 [jitsi_server:vars]
 ansible_python_interpreter=/usr/bin/python3
 
-[jitsi_jvb1:vars]
-ansible_python_interpreter=/usr/bin/python3
-
-[jitsi_jvb2:vars]
-ansible_python_interpreter=/usr/bin/python3
-
-[jitsi_jvb3:vars]
+[jitsi_jvbs:vars]
 ansible_python_interpreter=/usr/bin/python3
