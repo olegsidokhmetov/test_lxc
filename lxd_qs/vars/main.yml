@@ -1,0 +1,45 @@
+---
+
+#nombre del nodo lxd en el que se desplegara el ct.
+lxc_NODE_LXD: devel-lxc01
+
+# Nombre de nodo lxd para backups. Variable fija
+lxc_NODE_BACKUP: devel-lxc02
+
+#Nombre del contenedor. Para el CT de backup añadir -bak al final del nombre
+lxc_CT_NAME: Jitsi
+lxc_CT_NAME2: Jitsi-bak
+
+#Nombre de la plantilla
+lxc_CT_TMP: nombre.tmp
+
+#Variable con valores (master / backup). Únicamente se podrán utilizar esos dos parametros.Explicación en punto 4.
+lxc_CT_TYPE: 
+
+#ip que se configurará en el CT.
+lxc_IP_CT120: 192.168.100.120
+lxc_IP_CT121: 192.168.100.121
+lxc_IP_CT122: 192.168.100.122
+lxc_IP_CT123: 192.168.100.123
+
+#ip que se configurará en el contenedor de backup
+lxc_IP_CT_BAK: 
+
+#ip flotante para la configuración de keepalived
+lxc_IP_FLOAT: 172.16.3.85
+
+lxc_IP_GW1: 192.168.100.11 #Variable fija, esta variable se consultara según el NODE_LXD configurado.
+lxc_IP_GW2: 0000000 #Variable fija, esta variable se consultara según el NODE_LXD configurado.
+lxc_IP_GW3: 0000000 #Variable fija, esta variable se consultara según el NODE_LXD configurado.
+
+#Mask of network LXC container
+lxc_CT_MASK24: 24
+
+#DNS of LXC container
+lxc_CT_DNS1: 208.67.222.222
+lxc_CT_DNS2: 208.67.220.220
+
+lxc_profiles_mini: "['mini']"
+lxc_profiles_small: "['small']"
+lxc_profiles_medium: "['medium']"
+lxc_profiles_default: "['default']"

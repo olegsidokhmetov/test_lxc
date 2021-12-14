@@ -1,0 +1,11 @@
+---
+
+- name: Copying the directory and contents to remote host, copy network files in LXC container (/etc/ansible/roles/lxd_qs/files)
+  become: true 
+  copy:
+    src: "{{ lxc_src_path }}"
+    dest: "{{ lxc_dest_path }}"
+    owner: root
+    group: root        
+    mode: 0644
+  delegate_to: Server-55
