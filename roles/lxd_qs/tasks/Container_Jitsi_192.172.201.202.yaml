@@ -1,0 +1,45 @@
+---
+
+- name: Install provisioning dependencies
+  apt:
+    name: python3-lxc
+    state: present
+
+- name: Create LXD Container NextCloud
+  become: True
+  lxd_container:
+    name: "{{ lxc_CT_NAME }}"
+    state: started
+    ignore_volatile_options: true
+    source:
+      type: image
+      mode: pull
+      server: "{{ lxc_image_source }}"
+      protocol: simplestreams
+      alias: "{{ lxc_container_distro }}"
+    target: "{{ lxc_NODE_LXD }}"
+    profiles: "{{ lxc_profiles_mini }}"
+    wait_for_ipv4_addresses: true
+    timeout: 10
+  when: lxc_lxd_host is defined
+  register: container_created
+  delegate_to: devel-lxd01
+
+- name: List name of LXC network file in LXC path /etc/netplan/
+  shell: lxc exec "{{ lxc_CT_NAME }}" ls /etc/netplan/
+  register: file_of_network
+
+- debug:
+    msg: "{{ file_of_network.stdout }}"
+
+- name: Copy new IP to container LXC
+  shell: |
+    lxc file push /etc/ansible/roles/lxd_qs/files/{{ lxc_IP_CT202 }}.yaml local:"{{ lxc_CT_NAME }}"/etc/netplan/"{{ file_of_network.stdout }}"
+    lxc exec "{{ lxc_CT_NAME }}" netplan apply
+
+- name: Show us new IP of LXC container
+  shell: lxc exec "{{ lxc_CT_NAME }}" -- ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1
+  register: ip_of_container
+
+- debug:
+    msg: "{{ ip_of_container.stdout }}"

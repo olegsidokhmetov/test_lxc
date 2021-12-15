@@ -1,0 +1,19 @@
+- name: Run a command in a container and ensure its in a "stopped" state.
+  community.general.lxc_container:
+    name: Jitsi-bak
+    state: started
+    container_command: |
+      echo 'hello world.' | tee /opt/stopped
+
+
+- name: check python is installed in container
+  delegate_to:  Jitsi-bak
+  raw: dpkg -s python
+  register: python_install_check
+  failed_when: python_install_check.rc not in [0, 1]
+  changed_when: false
+
+- name: install python in container
+  delegate_to:  Jitsi-bak
+  raw: apt-get install -y python
+  when: python_install_check.rc == 1

@@ -1,0 +1,51 @@
+---
+
+- name: Install provisioning dependencies
+  apt:
+    name: python3-lxc
+    state: present
+
+- name: Create LXD Container Jitsi_bak
+  become: True
+  lxd_container:
+    name: "{{ lxc_CT_NAME2 }}"
+    state: started
+    ignore_volatile_options: true
+    source:
+      type: image
+      mode: pull
+      server: "{{ lxc_image_source }}"
+      protocol: simplestreams
+      alias: "{{ lxc_container_distro }}"
+    target: "{{ lxc_NODE_BACKUP }}"
+    profiles: "{{ lxc_profiles_mini }}"
+    wait_for_ipv4_addresses: true
+    timeout: 10
+  when: lxc_lxd_host is defined
+  register: container_Jitsi_bak
+  # delegate_to: Server-55
+
+- name: List name of LXC network file in Jitsi_bak LXC path /etc/netplan/
+  shell: lxc exec "{{ lxc_CT_NAME2 }}" ls /etc/netplan/
+  register: file_of_Jitsi_bak
+
+- debug:
+    msg: "{{ file_of_Jitsi_bak.stdout }}"
+
+- name: Copy new IP to container Jitsi_bak
+  shell: |
+    lxc file push /etc/ansible/roles/lxd_qs/files/{{ lxc_IP_CT203 }}.yaml local:"{{ lxc_CT_NAME2 }}"/etc/netplan/"{{ file_of_Jitsi_bak.stdout }}"
+    lxc exec "{{ lxc_CT_NAME2 }}" netplan apply
+
+- name: Show us new IP of Jitsi_bak container
+  shell: lxc exec "{{ lxc_CT_NAME2 }}" -- ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1
+  register: ip_of_container_Jitsi_bak
+
+- debug:
+    msg: "{{ ip_of_container_Jitsi_bak.stdout }}"
+
+# - name: Restart container
+#   lxd_container:
+#     name: "{{ lxc_CT_NAME2 }}"
+#     ignore_volatile_options: true
+#     state: restarted

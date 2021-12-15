@@ -1,0 +1,50 @@
+---
+
+#nombre del nodo lxd en el que se desplegara el ct.
+lxc_NODE_LXD: devel-lxd01
+
+# Nombre de nodo lxd para backups. Variable fija
+lxc_NODE_BACKUP: devel-lxd02
+
+#Nombre del contenedor. Para el CT de backup añadir -bak al final del nombre
+lxc_CT_NAME: NextCloud
+lxc_CT_NAME2: Jitsi-bak
+
+#Nombre de la plantilla
+lxc_CT_TMP: nombre.tmp
+
+#Variable con valores (master / backup). Únicamente se podrán utilizar esos dos parametros.Explicación en punto 4.
+lxc_CT_TYPE: 
+
+#ip que se configurará en el CT.
+lxc_IP_CT202: 192.172.201.202
+lxc_IP_CT203: 192.172.201.203
+lxc_IP_CT204: 192.172.201.204
+lxc_IP_CT205: 192.172.201.205
+
+#ip que se configurará en el contenedor de backup
+lxc_IP_CT_BAK: 
+
+#ip flotante para la configuración de keepalived
+lxc_IP_FLOAT: 172.16.3.85
+
+lxc_IP_GW1: 192.172.201.1 #Variable fija, esta variable se consultara según el NODE_LXD configurado.
+lxc_IP_GW2: 0000000 #Variable fija, esta variable se consultara según el NODE_LXD configurado.
+lxc_IP_GW3: 0000000 #Variable fija, esta variable se consultara según el NODE_LXD configurado.
+
+#Mask of network LXC container
+lxc_CT_MASK24: 24
+
+#DNS of LXC container
+lxc_CT_DNS1: 208.67.222.222
+lxc_CT_DNS2: 208.67.220.220
+
+#LXC profiles
+lxc_profiles_mini: "['mini']"
+lxc_profiles_small: "['small']"
+lxc_profiles_medium: "['medium']"
+lxc_profiles_default: "['default']"
+
+#Proxy
+http_proxy: http://10.128.64.250:3128
+https_proxy: http://10.128.64.250:3128

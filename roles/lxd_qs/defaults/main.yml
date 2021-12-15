@@ -1,0 +1,12 @@
+---
+# defaults file for lxd_qs
+
+lxc_container_distro: "20.04/amd64"
+lxc_image_source: "https://cloud-images.ubuntu.com/releases"
+
+lxc_lxd_host: ""
+lxc_lxd_port: "8443"
+
+#If we need to copy our network IP files to remote backup host (for example host devel-lxd02:)
+lxc_src_path: /etc/ansible/roles/lxd_qs/files
+lxc_dest_path: /etc/ansible/roles/lxd_qs/
