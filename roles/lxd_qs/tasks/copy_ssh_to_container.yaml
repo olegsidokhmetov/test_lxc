@@ -1,12 +1,12 @@
 ---
-- name: check out host ssh public key
+- name: checkout host ssh public key
   shell: cat /root/.ssh/id_rsa.pub
   register: ssh_pub_key
 
 - debug:
     msg: "{{ ssh_pub_key.stdout }}"
 
-- name: copy ssh public key to container Jitsi
+- name: copy ssh public key to container NextCloud
   shell: |
     lxc exec Jitsi -- sh -c "echo {{ ssh_pub_key.stdout }} > /root/.ssh/authorized_keys"
 

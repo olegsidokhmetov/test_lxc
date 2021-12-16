@@ -48,3 +48,6 @@ lxc_profiles_default: "['default']"
 #Proxy
 http_proxy: http://10.128.64.250:3128
 https_proxy: http://10.128.64.250:3128
+
+#Templates variables
+lxc_IP_var204: 192.172.201.204.yaml.j2

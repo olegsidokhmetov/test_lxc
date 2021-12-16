@@ -1,0 +1,7 @@
+- name: Replace in file "/home/docker-jitsi-meet/.env" line JVB_AUTH_USER=jvb
+  replace:
+    path: "{{ item.path }}"
+    regexp: "{{ item.regexp }}"
+    replace: "{{ item.replace }}"
+  with_items:
+    - {path: '/home/docker-jitsi-meet/.env', regexp: "JVB_AUTH_USER=jvb", replace: "JVB_AUTH_USER=JVB2"}
