@@ -1,0 +1,13 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth1:
+      addresses:
+        - {{ lxc_IP_CT203 }}/{{ lxc_CT_MASK24 }}
+      gateway4: {{ lxc_IP_GW1 }}
+      mtu: 1400
+      nameservers:
+          addresses:
+          - {{ lxc_CT_DNS1 }}
+          - {{ lxc_CT_DNS2 }}

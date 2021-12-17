@@ -9,6 +9,6 @@
     - name: Run a command in a container and then restart it
       community.general.lxc_container:
         name: Jitsi-bak
-        # state: restarted
+        state: restarted
         container_command: |
           echo 'hello world.' | tee /opt/restarted

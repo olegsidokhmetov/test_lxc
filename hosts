@@ -51,6 +51,7 @@ devel-lxd02 ansible_host=192.172.201.4
 [Containers]
 Ansible ansible_connection=local
 JitsiContainer ansible_host=192.172.201.201
+Jitsi-bak ansible_host=192.172.201.204
 
 [cluster:children]
 CusterServer01

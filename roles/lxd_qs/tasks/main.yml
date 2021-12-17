@@ -9,8 +9,8 @@
     - name:  Ansible Copy Directory Local /etc/ansible/roles/lxd_qs/files to Remote host
       include: Copying_Directory_and_contents.yaml
 
-    # - name: Creating Cantainer NextCloud with IP 192.172.201.202
-    #   include: Container_NextCloud_192.172.201.202.yaml
+    - name: Creating Cantainer NextCloud with IP 192.172.201.202
+      include: Container_NextCloud_192.172.201.203.yaml
 
     - name:  Creating Cantainer Jitsi-bak with IP 192.172.201.204
       include: Container_Jitsi_bak_192.172.201.204.yaml
