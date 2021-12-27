@@ -6,8 +6,8 @@
   - /etc/ansible/roles/lxd_qs/defaults/main.yml
   tasks:
 
-    - name:  Ansible Copy Directory Local /etc/ansible/roles/lxd_qs/files to Remote host
-      include: Copying_Directory_and_contents.yaml
+    # - name:  Ansible Copy Directory Local /etc/ansible/roles/lxd_qs/files to Remote host
+    #   include: Copying_Directory_and_contents.yaml
 
     - name: Creating Cantainer NextCloud with IP 192.172.201.202
       include: Container_NextCloud_192.172.201.203.yaml

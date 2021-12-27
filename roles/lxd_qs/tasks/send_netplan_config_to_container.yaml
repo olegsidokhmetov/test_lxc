@@ -1,3 +1,5 @@
+---
+
 - name: List name of LXC network file in Jitsi_bak LXC path /etc/netplan/
   shell: lxc exec "{{ lxc_CT_NAME2 }}" ls /etc/netplan/
   register: file_of_Jitsi_bak
@@ -5,10 +7,15 @@
 - debug:
     msg: "{{ file_of_Jitsi_bak.stdout }}"
 
+- name:  Create directory for each container
+  file:
+    path: /tmp/{{ lxc_CT_NAME2 }}
+    state: directory
+
 - name: (Jitsi_bak) Using template to copy a file from hostin folder /tmp/ with name of file netplan from LXC container
   ansible.builtin.template:
     src: /etc/ansible/roles/lxd_qs/templates/{{ lxc_IP_var204 }}
-    dest: /tmp/{{ file_of_Jitsi_bak.stdout }}
+    dest: /tmp/{{ lxc_CT_NAME2 }}/{{ file_of_Jitsi_bak.stdout }}
     owner: root
     group: root
     mode: '0644'
@@ -16,7 +23,7 @@
 
 - name: Copy new IP to container Jitsi_bak from /tmp/ folder in host
   shell: |
-    lxc file push /tmp/{{ file_of_Jitsi_bak.stdout }} local:"{{ lxc_CT_NAME2 }}"/etc/netplan/"{{ file_of_Jitsi_bak.stdout }}"
+    lxc file push /tmp/{{ lxc_CT_NAME2 }}/{{ file_of_Jitsi_bak.stdout }} local:"{{ lxc_CT_NAME2 }}"/etc/netplan/"{{ file_of_Jitsi_bak.stdout }}"
     lxc exec "{{ lxc_CT_NAME2 }}" netplan apply
 
 - name: Show us new IP of Jitsi_bak container
@@ -34,20 +41,25 @@
 - debug:
     msg: "{{ file_of_network.stdout }}"
 
+- name: Create directory for each container
+  file:
+    path: /tmp/{{ lxc_CT_NAME }}
+    state: directory
+
 - name: (NEXTCLOUD) Using template to copy a file from host folder /tmp/ with name of file netplan to LXC container
   ansible.builtin.template:
     src: /etc/ansible/roles/lxd_qs/templates/{{ lxc_IP_var203 }}
-    dest: /tmp/{{ file_of_network.stdout}}
+    dest: /tmp/{{ lxc_CT_NAME }}/{{ file_of_network.stdout}}
     owner: root
     group: root
     mode: '0644'
-  delegate_to: "{{ lxc_NODE_LXD }}"
+# delegate_to: "{{ lxc_NODE_LXD }}"
 
 - name: Copy new IP to container LXC
   shell: |
-    lxc file push /tmp/{{ file_of_network.stdout}} local:"{{ lxc_CT_NAME }}"/etc/netplan/"{{ file_of_network.stdout }}"
+    lxc file push /tmp/{{ lxc_CT_NAME }}/{{ file_of_network.stdout}} local:"{{ lxc_CT_NAME }}"/etc/netplan/"{{ file_of_network.stdout }}"
     lxc exec "{{ lxc_CT_NAME }}" netplan apply
-  delegate_to: "{{ lxc_NODE_LXD }}"
+#  delegate_to: "{{ lxc_NODE_LXD }}"
 
 
 - name: Show us new IP of LXC container

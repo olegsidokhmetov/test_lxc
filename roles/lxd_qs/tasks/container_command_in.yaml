@@ -6,9 +6,7 @@
   - /etc/ansible/roles/lxd_qs/defaults/main.yml
   tasks:
 
-    - name: Run a command in a container and then restart it
-      community.general.lxc_container:
-        name: Jitsi-bak
-        # state: restarted
-        container_command: |
-          echo 'hello world.' | tee /opt/restarted
+    - name: Create directory
+      file:
+        path: /tmp/{{ lxc_CT_NAME2 }}
+        state: directory
