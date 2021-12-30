@@ -1,0 +1,5 @@
+- name: Update cache 
+  command: apt-get update
+
+- name: Upgrade
+  shell: apt-get -y upgrade

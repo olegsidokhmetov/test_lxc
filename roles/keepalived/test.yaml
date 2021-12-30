@@ -1,0 +1,24 @@
+---
+- hosts: Jitsi
+  gather_facts: true
+  become: yes
+  tasks:
+
+    - name: Update cache 
+      command: apt-get update
+
+    - name: Update cache 
+      shell: apt-get -y upgrade
+
+
+    # - name: Update cache 
+    #   apt:
+    #     update_cache: true
+    #   delegate_to: Jitsi
+
+    # - name: Upgrade all packages on servers
+    #   apt: 
+    #     name: "*"
+    #     state: latest
+    #   delegate_to: Jitsi
+

@@ -1,0 +1,20 @@
+---
+- hosts: keepalived
+  gather_facts: true
+  become: yes
+  tasks:
+
+    - name: Update and upgrade
+      include: update_upgrade.yaml
+
+    - name: istall keepalived
+      include: install_keepalived.yaml
+
+    - name: configure keepalived NODE1
+      include: configure_keepalived_node1.yaml
+
+    - name: configure keepalived NODE2
+      include: configure_keepalived_node2.yaml
+
+    - name: Install Nginx
+      include: install_nginx.yaml

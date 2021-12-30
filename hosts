@@ -53,9 +53,14 @@ Ansible ansible_connection=local
 JitsiContainer ansible_host=192.172.201.201
 Jitsi-bak ansible_host=192.172.201.204
 
+[keepalived]
+Jitsi  ansible_host=192.172.201.201
+Jitsi-bak ansible_host=192.172.201.202
+
 [cluster:children]
 CusterServer01
 CusterServer02
+
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3

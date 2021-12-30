@@ -9,23 +9,23 @@
     # - name:  Ansible Copy Directory Local /etc/ansible/roles/lxd_qs/files to Remote host
     #   include: Copying_Directory_and_contents.yaml
 
-    - name: Creating Cantainer NextCloud with IP 192.172.201.202
-      include: Container_NextCloud_192.172.201.203.yaml
+    - name: Creating Cantainer "{{ lxc_CT_NAME }}" with IP 192.172.201.201
+      include: 1 - Container_master_192.172.201.201.yaml
 
-    - name:  Creating Cantainer Jitsi-bak with IP 192.172.201.204
-      include: Container_Jitsi_bak_192.172.201.204.yaml
+    - name:  Creating Cantainer "{{ lxc_CT_NAME2 }}" with IP 192.172.201.202
+      include: 2 - Container_backup_192.172.201.202.yaml
 
-    - name: Send netplan config to LXC container
-      include: send_netplan_config_to_container.yaml
+    - name: Send netplan config to LXC containers
+      include: 3 - Send_netplan_config_to_containers.yaml
 
     - name:  Adding proxy setiing in LXC container
-      include: add_proxy_setiings_in_LXC_container.yaml
+      include: 4 - add_proxy_setiings_in_LXC_container.yaml
+
+    - name:  Check and copy ssh public key to containers
+      include: 5 - copy_ssh_to_container.yaml
 
     # - name:  Run a complex command within a "running" container
     #   include: container_command_in.yaml
-
-    # - name:  Check and copy ssh public key to containers
-    #   include: copy_ssh_to_container.yaml
 
     # - name:  Create directory in container Jitsi-bak
     #   include: create_directory.yaml

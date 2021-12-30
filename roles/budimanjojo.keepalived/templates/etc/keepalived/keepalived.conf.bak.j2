@@ -1,0 +1,14 @@
+vrrp_instance {{ instance_state_NODE2 }} {
+    state {{ instance_state }}
+    interface {{ instance_interface }}
+    virtual_router_id {{ virtual_router_id }}
+    priority {{ instance_priority_NODE2 }}
+    advert_int {{ advert_int }}
+    authentication {
+        auth_type {{ auth_type }}
+        auth_pass {{ auth_pass }}
+    }
+    virtual_ipaddress {
+        {{ virtual_ipaddress }}
+    }
+}

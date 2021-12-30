@@ -1,0 +1,9 @@
+---
+keepalived_package_name: keepalived
+keepalived_service_name: keepalived
+keepalived_global_defs_options: {}
+keepalived_vrrp_scripts: []
+keepalived_vrrp_instances: []
+keepalived_virtual_servers: []
+keepalived_real_servers: []
+keepalived_vrrp_sync_groups: []

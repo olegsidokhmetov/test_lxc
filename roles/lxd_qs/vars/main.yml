@@ -1,5 +1,8 @@
 ---
 
+#Master server with Ansible
+lxc_master_server: Ansible
+
 #nombre del nodo lxd en el que se desplegara el ct.
 lxc_NODE_LXD: devel-lxd01
 
@@ -7,8 +10,10 @@ lxc_NODE_LXD: devel-lxd01
 lxc_NODE_BACKUP: devel-lxd02
 
 #Nombre del contenedor. Para el CT de backup añadir -bak al final del nombre
-lxc_CT_NAME: NextCloud
-lxc_CT_NAME2: Jitsi-bak
+# lxc_CT_NAME: Jitsi
+# lxc_CT_NAME2: Jitsi-bak
+lxc_CT_NAME: Nginx
+lxc_CT_NAME2: Nginx-bak
 
 #Nombre de la plantilla
 lxc_CT_TMP: nombre.tmp
@@ -17,6 +22,7 @@ lxc_CT_TMP: nombre.tmp
 lxc_CT_TYPE: 
 
 #ip que se configurará en el CT.
+lxc_IP_CT201: 192.172.201.201
 lxc_IP_CT202: 192.172.201.202
 lxc_IP_CT203: 192.172.201.203
 lxc_IP_CT204: 192.172.201.204
@@ -49,6 +55,8 @@ lxc_profiles_default: "['default']"
 http_proxy: http://10.128.64.250:3128
 https_proxy: http://10.128.64.250:3128
 
-#Templates variables
+#Templates IP variables
+lxc_IP_var201: 192.172.201.201.yaml.j2
+lxc_IP_var202: 192.172.201.202.yaml.j2
 lxc_IP_var203: 192.172.201.203.yaml.j2
 lxc_IP_var204: 192.172.201.204.yaml.j2

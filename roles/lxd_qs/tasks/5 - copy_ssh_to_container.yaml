@@ -1,0 +1,16 @@
+---
+- name: Checkout host ssh public key on the main host "{{ lxc_master_server }}"
+  shell: cat /root/.ssh/id_rsa.pub
+  register: ssh_pub_key
+  delegate_to: "{{ lxc_master_server }}" #Host with file "id_rsa.pub"
+
+- debug:
+    msg: "{{ ssh_pub_key.stdout }}"
+
+- name: Copy ssh public key to container "{{ lxc_CT_NAME }}"
+  shell: |
+    lxc exec "{{ lxc_CT_NAME }}" -- sh -c "echo {{ ssh_pub_key.stdout }} > /root/.ssh/authorized_keys"
+
+- name: Copy ssh public key to container "{{ lxc_CT_NAME2 }}" 
+  shell: |
+    lxc exec "{{ lxc_CT_NAME2 }}" -- sh -c "echo {{ ssh_pub_key.stdout }} > /root/.ssh/authorized_keys"

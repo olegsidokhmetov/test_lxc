@@ -1,0 +1,70 @@
+---
+
+#################################Jitsi#################################
+- name: List name of "{{ lxc_CT_NAME }}" LXC container network file in LXC path /etc/netplan/
+  shell: lxc exec "{{ lxc_CT_NAME }}" ls /etc/netplan/
+  register: file_of_network_master
+
+- debug:
+    msg: "{{ file_of_network_master.stdout }}"
+
+- name: Create directory on host for container "{{ lxc_CT_NAME }}"
+  file:
+    path: /tmp/{{ lxc_CT_NAME }}
+    state: directory
+
+- name: Using template to copy a file from host folder /tmp/ with name of file netplan to LXC container "{{ lxc_CT_NAME }}"
+  ansible.builtin.template:
+    src: /etc/ansible/roles/lxd_qs/templates/{{ lxc_IP_var203 }}
+    dest: /tmp/{{ lxc_CT_NAME }}/{{ file_of_network_master.stdout }}
+    owner: root
+    group: root
+    mode: '0644'
+# delegate_to: "{{ lxc_NODE_LXD }}"
+
+- name: Copy new IP to container LXC "{{ lxc_CT_NAME }}"
+  shell: |
+    lxc file push /tmp/{{ lxc_CT_NAME }}/{{ file_of_network_master.stdout }} local:"{{ lxc_CT_NAME }}"/etc/netplan/"{{ file_of_network_master.stdout }}"
+    lxc exec "{{ lxc_CT_NAME }}" netplan apply
+
+- name: Show us new IP of LXC container "{{ lxc_CT_NAME }}"
+  shell: lxc exec "{{ lxc_CT_NAME }}" -- ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1
+  register: ip_of_container_master
+
+- debug:
+    msg: "{{ ip_of_container_master.stdout }}"
+#################################End code for Jitsi#################################
+
+#################################Jitsi-bak#################################
+- name: List name of LXC network file in "{{ lxc_CT_NAME2 }}"  LXC path /etc/netplan/
+  shell: lxc exec "{{ lxc_CT_NAME2 }}" ls /etc/netplan/
+  register: file_of_network_backup
+
+- debug:
+    msg: "{{ file_of_network_backup.stdout }}"
+
+- name:  Create directory for container "{{ lxc_CT_NAME2 }}"
+  file:
+    path: /tmp/{{ lxc_CT_NAME2 }}
+    state: directory
+
+- name: Using template to copy a file from hostin folder /tmp/ with name of file netplan from LXC container "{{ lxc_CT_NAME2 }}"
+  ansible.builtin.template:
+    src: /etc/ansible/roles/lxd_qs/templates/{{ lxc_IP_var204 }}
+    dest: /tmp/{{ lxc_CT_NAME2 }}/{{ file_of_network_backup.stdout }}
+    owner: root
+    group: root
+    mode: '0644'
+#  delegate_to: "{{ lxc_NODE_BACKUP }}"
+
+- name: Copy new IP to container "{{ lxc_CT_NAME2 }}" from /tmp/ folder on host
+  shell: |
+    lxc file push /tmp/{{ lxc_CT_NAME2 }}/{{ file_of_network_backup.stdout }} local:"{{ lxc_CT_NAME2 }}"/etc/netplan/"{{ file_of_network_backup.stdout }}"
+    lxc exec "{{ lxc_CT_NAME2 }}" netplan apply
+
+- name: Show us new IP of "{{ lxc_CT_NAME2 }}" container
+  shell: lxc exec "{{ lxc_CT_NAME2 }}" -- ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1
+  register: ip_of_container_backup
+
+- debug:
+    msg: "{{ ip_of_container_backup.stdout }}"

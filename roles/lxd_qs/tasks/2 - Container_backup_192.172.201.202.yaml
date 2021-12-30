@@ -5,7 +5,7 @@
     name: python3-lxc
     state: present
 
-- name: Create LXD Container Jitsi_bak
+- name: Create LXD Container "{{ lxc_CT_NAME2 }}"
   become: True
   lxd_container:
     name: "{{ lxc_CT_NAME2 }}"
