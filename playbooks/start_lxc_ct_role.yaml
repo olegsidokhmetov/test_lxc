@@ -1,0 +1,9 @@
+---
+- hosts: devel-lxd02
+  gather_facts: false
+  vars_files:
+  - /etc/ansible/roles/lxd_qs/vars/main.yml
+  - /etc/ansible/roles/lxd_qs/defaults/main.yml
+
+  roles:
+     - lxd_qs
