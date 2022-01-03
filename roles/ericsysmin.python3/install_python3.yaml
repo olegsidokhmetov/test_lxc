@@ -1,4 +1,0 @@
-- hosts: Jitsi
-  roles:
-    - role: ericsysmin.python3
-      python3_default_system: true

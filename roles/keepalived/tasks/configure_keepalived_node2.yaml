@@ -1,9 +1,0 @@
-- name: configure keepalived Node2
-  ansible.builtin.template:
-    src: keepalived.conf.bak.j2
-    dest: /etc/keepalived/keepalived.conf
-    mode: "0640"
-    validate: keepalived --config-test --use-file=%s
-  notify:
-    - restart keepalived
-  delegate_to: Jitsi-bak  

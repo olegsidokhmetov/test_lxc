@@ -1,6 +1,0 @@
----
-- name: Converge
-  hosts: all
-  roles:
-    - role: ericsysmin.python3
-      python3_default_user: true

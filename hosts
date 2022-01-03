@@ -57,6 +57,10 @@ Jitsi-bak ansible_host=192.172.201.204
 Jitsi  ansible_host=192.172.201.201
 Jitsi-bak ansible_host=192.172.201.202
 
+[keepalived_Nginx]
+Nginx ansible_host=192.172.201.203
+Nginx-bak ansible_host=192.172.201.204
+
 [cluster:children]
 CusterServer01
 CusterServer02

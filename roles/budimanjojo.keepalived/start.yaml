@@ -1,4 +1,0 @@
-- hosts: keepalived
-
-  roles:
-  - budimanjojo.keepalived

@@ -1,8 +1,0 @@
-- name: configure keepalived
-  ansible.builtin.template:
-    src: keepalived.conf.j2
-    dest: /etc/keepalived/keepalived.conf
-    mode: "0640"
-    validate: keepalived --config-test --use-file=%s
-  notify:
-    - restart keepalived

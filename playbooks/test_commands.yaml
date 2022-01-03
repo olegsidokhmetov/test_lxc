@@ -1,0 +1,52 @@
+---
+
+- hosts: devel-lxd01
+  become: true
+
+  tasks:
+
+    # - name: Create a started container
+    #   community.general.lxc_container:
+    #     name: test-container-started
+    #     container_log: true
+    #     template: ubuntu
+    #     state: started
+    #     template_options: --release trusty
+
+    # - name: Check python is installed in container
+    #   delegate_to: Nginx
+    #   ansible.builtin.raw: dpkg -s python
+    #   register: tree_install_check
+    #   failed_when: tree_install_check.rc not in [0, 1]
+    #   changed_when: false
+
+    # - name: Install tree in container
+    #   delegate_to: Nginx
+    #   ansible.builtin.raw: apt-get install -y tree
+    #   when: tree_install_check.rc == 1
+
+
+    # - name: Update cache
+    #   delegate_to: Nginx
+    #   ansible.builtin.raw: apt-get update
+
+    # - name: Upgrade pkg
+    #   delegate_to: Nginx
+    #   ansible.builtin.raw: apt-get upgrade
+
+    # - name: Install tree in container
+    #   delegate_to: Nginx
+    #   ansible.builtin.raw: apt-get install -y tree
+
+    # - name: Run a complex command within a "running" container
+    #   community.general.lxc_container:
+    #     name: Nginx
+    #     container_command: |
+    #         apt-get update
+
+
+    - name: Run a command in a container and ensure its it in a "frozen" state.
+      community.general.lxc_container:
+        name: Nginx
+        container_command: |
+          echo 'hello world.' | tee /opt/frozen
