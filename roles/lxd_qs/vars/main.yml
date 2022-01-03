@@ -16,7 +16,7 @@ lxc_CT_NAME: Nginx
 lxc_CT_NAME2: Nginx-bak
 
 #Nombre de la plantilla
-lxc_CT_TMP: nombre.tmp
+lxc_CT_TMP: ubuntu
 
 #Variable con valores (master / backup). Únicamente se podrán utilizar esos dos parametros.Explicación en punto 4.
 lxc_CT_TYPE: 
