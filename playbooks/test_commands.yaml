@@ -46,7 +46,7 @@
 
 
     - name: Run a command in a container and ensure its it in a "frozen" state.
-      community.general.lxc_container:
+      community.general.lxd_container:
         name: Nginx
         container_command: |
           echo 'hello world.' | tee /opt/frozen
