@@ -1,0 +1,27 @@
+---
+ - hosts: devel-lxd01
+   gather_facts: false
+   vars_files:
+   - /etc/ansible/roles/make_jitsi/lxd_qs/vars/main.yml
+   - /etc/ansible/roles/make_jitsi/lxd_qs/defaults/main.yml
+   tasks:
+
+    - name: Creating Cantainer
+      import_tasks: 1-Creating_container.yaml
+
+    - name: Send netplan config to LXC containers
+      import_tasks: 2-Send_netplan_config_to_containers.yaml
+
+    - name:  Adding proxy setiing in LXC container
+      import_tasks: 3-Add_proxy_setiings_in_LXC_container.yaml
+
+    - name:  Check and copy ssh public key to LXC containers
+      import_tasks: 3.1-Copy_ssh_to_container.yaml
+
+    - name: Updates and install keepalived 
+      become: yes
+      import_tasks: 4-Update_and_install_keepalived.yaml
+
+    - name: Configure keepalived 
+      become: yes
+      import_tasks: 5-Configure_keepalived.yaml

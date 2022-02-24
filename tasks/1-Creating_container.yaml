@@ -1,0 +1,33 @@
+---
+
+- name: Create LXD Container
+  become: True
+  lxd_container:
+    name: "{{ item.name }}"
+    state: started
+    ignore_volatile_options: true
+    source:
+      type: image
+      mode: pull
+      server: "{{ lxc_image_source }}"
+      protocol: simplestreams
+      alias: "{{ lxc_container_distro }}"
+    target: "{{ item.node }}"
+    profiles: "{{ lxc_profiles_medium }}"
+    wait_for_ipv4_addresses: true
+    timeout: 10
+  with_items: "{{ containers }}"
+  delegate_to: "{{ item.node }}"
+
+- name: Pause for 5 seconds to build container
+  pause:
+    seconds : 5
+
+
+
+#Shell commands para crear contenodores
+# - name: 1-Create LXD Container
+#   shell: lxc launch  {{ lxc_image_source }}:{{ lxc_container_distro }} {{ item.name }} -p {{ lxc_profiles_medium }} --target {{ item.node }}
+# # shell: lxc launch  {{ lxc_image_source }}:{{ lxc_CT_TMP }} {{ item.name }} -p {{ lxc_profiles_medium }} --target {{ item.node }}
+#   with_items: "{{ containers }}"
+

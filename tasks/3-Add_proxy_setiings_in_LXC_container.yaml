@@ -1,0 +1,7 @@
+---
+
+- name: 3-Add proxy setiings in LXC container
+  shell: |
+    lxc config set {{ item.name }} environment.http_proxy={{ http_proxy }}
+    lxc config set {{ item.name }} environment.https_proxy={{ https_proxy }}
+  with_items: "{{ containers }}"

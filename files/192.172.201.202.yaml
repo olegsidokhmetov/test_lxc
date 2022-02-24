@@ -1,0 +1,13 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth1:
+      addresses:
+        - 192.172.201.202/24
+      gateway4: 192.172.201.1
+      mtu: 1400
+      nameservers:
+          addresses:
+          - 208.67.222.222
+          - 208.67.220.220
