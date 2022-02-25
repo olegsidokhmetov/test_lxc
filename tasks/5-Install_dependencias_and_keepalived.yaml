@@ -1,0 +1,28 @@
+---
+
+- name: 5-Install dependencies 
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - gcc
+      - libnl-3-dev
+      - libssl-dev
+      - libnl-genl-3-dev 
+      - libsnmp-dev
+      - curl
+      - software-properties-common
+  environment:                               #If your server uses a proxy, if NOT comment out.
+    http_proxy: "{{ proxy }}"                #If your server uses a proxy, if NOT comment out.
+  delegate_to: "{{ item.name }}"
+  with_items: "{{ containers }}"
+
+- name: 5.1-Install keepalived
+  apt:
+    name: keepalived
+    state: present
+  environment:                               #If your server uses a proxy, if NOT comment out.
+    http_proxy: "{{ proxy }}"                #If your server uses a proxy, if NOT comment out.
+  delegate_to: "{{ item.ctip }}"             #was "{{ item.ctip }}"
+  with_items: "{{ containers }}"

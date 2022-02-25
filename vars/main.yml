@@ -33,7 +33,7 @@ containers:
    ctgw: 192.172.201.1                       #aded 21/02/2022
    mask: 24
    ipkeep: 172.16.3.43/24
-   keeptype: BACKUP
+   keeptype: BACKUP2
    service: jitsi
    node: devel-lxd02
    file_netplan: 50-cloud-init.yaml

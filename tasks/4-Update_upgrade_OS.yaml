@@ -1,0 +1,12 @@
+---
+
+- name: 4-Upgrade all packages on servers
+  apt:
+    upgrade: yes
+    update_cache: yes
+    # name: "*"
+    #state: latest
+  environment:                               #If your server uses a proxy, if NOT comment out.
+    http_proxy: "{{ proxy }}"                #If your server uses a proxy, if NOT comment out.
+  delegate_to: "{{ item.ctip }}"             #was "{{ item.ctip }}"
+  with_items: "{{ containers }}"

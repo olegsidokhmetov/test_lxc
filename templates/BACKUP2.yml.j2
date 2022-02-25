@@ -2,7 +2,7 @@
 
 vrrp_instance VI_{{ VRRP1 }} {
     state BACKUP
-    interface eth0
+    interface {{ keepalived_interface }}
     virtual_router_id {{ Virtual_id_51 }}
     priority 200
     advert_int 1

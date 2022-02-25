@@ -22,12 +22,3 @@
 - name: Pause for 5 seconds to build container
   pause:
     seconds : 5
-
-
-
-#Shell commands para crear contenodores
-# - name: 1-Create LXD Container
-#   shell: lxc launch  {{ lxc_image_source }}:{{ lxc_container_distro }} {{ item.name }} -p {{ lxc_profiles_medium }} --target {{ item.node }}
-# # shell: lxc launch  {{ lxc_image_source }}:{{ lxc_CT_TMP }} {{ item.name }} -p {{ lxc_profiles_medium }} --target {{ item.node }}
-#   with_items: "{{ containers }}"
-

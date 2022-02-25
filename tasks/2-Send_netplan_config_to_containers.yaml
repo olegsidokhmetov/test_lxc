@@ -16,7 +16,7 @@
     mode: '0644'
   with_items: "{{ containers }}"
 
-- name: 2.2-Move netplan for rename to old netplan
+- name: 2.2-Rename network file of netplan to *.old
   shell: lxc exec "{{ item.name }}" -- sh -c "mv /etc/netplan/{{ item.file_netplan }} /etc/netplan/{{ item.file_netplan }}_old"
   with_items: "{{ containers }}"
 
