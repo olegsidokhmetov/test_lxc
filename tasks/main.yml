@@ -1,10 +1,4 @@
 ---
-#  - hosts: devel-lxd01
-#    gather_facts: false
-#    vars_files:
-#    - /etc/ansible/roles/make_jitsi/lxd_qs/vars/main.yml
-#    - /etc/ansible/roles/make_jitsi/lxd_qs/defaults/main.yml
-#    tasks:
 
     - name: Creating Cantainer
       import_tasks: 1-Creating_container.yaml
