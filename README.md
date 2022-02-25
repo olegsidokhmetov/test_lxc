@@ -39,6 +39,16 @@ Si está utilizando un proxy, incluya esta tarea en su rol
 3-Add_proxy_setiings_in_LXC_container.yaml
 ```
 
+- Configuración de SSH.
+Tarea para recopilar las claves públicas disponibles de múltiples de hosts y copiándolos a un archivo en el servidor principal de Ansible en /root/.ssh/known_hosts
+
+```
+Paso:
+3.1-Copy_ssh_to_container.yaml
+```
+
+
+
 - Update y upgrade del SO
 ```
 Paso:
