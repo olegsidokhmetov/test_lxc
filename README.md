@@ -8,7 +8,6 @@ El playbook se divide en 3 tipos de tareas diferentes
 * **post-jitsi**
 
 ### Pre-jitsi
-- Despliege de contenedores en distintos nodos LXD a partir de una plantilla con previamente securizada a nivel de usuarios.
 
 Si desea instalar sólo contenedores `LXD` y la instalación keepalived con la configuración ejecute el rol usando playbook `ini.yaml` de la carpeta `/etc/ansible/playbooks`. 
 ```
@@ -23,6 +22,8 @@ Si desea instalar sólo contenedores `LXD` y la instalación keepalived con la c
    roles:
      - role: "/etc/ansible/roles/make_jitsi/lxd_qs"
 ```
+
+- Despliege de contenedores en distintos nodos LXD a partir de una plantilla con previamente securizada a nivel de usuarios.
 
 ```
 Paso:
