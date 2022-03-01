@@ -42,14 +42,60 @@
 
 ## db-[99:101]-node.example.com
 
-[jitsi_server]
-jitsi ansible_host=80.78.244.214
+; [qs_lxc01]
+; reg-lxd01 ansible_host=151.248.113.209
 
-[jitsi_jvbs]
-jvb1 ansible_host=89.108.78.209
+; [Ip_tables]
+; iptables ansible_host=194.67.108.192
 
-[jitsi_server:vars]
-ansible_python_interpreter=/usr/bin/python3
+; [jitsi_server]
+; jitsi ansible_host=194.67.92.198
 
-[jitsi_jvbs:vars]
+[jitsi_jvb1]
+jvb1 ansible_host=194.58.92.102
+
+[jitsi_jvb2]
+jvb2 ansible_host=80.78.253.228
+
+[jitsi_jvb3]
+jvb3 ansible_host=194.67.92.198
+
+[jvb_js]
+194.58.92.102
+80.78.253.228
+194.67.92.198
+
+[Containers]
+jitsi ansible_host=80.78.246.69
+
+[jitsi_js:children]
+jvb_js
+
+; [HA_Worker_Nodes]
+; jitsi ansible_host=89.108.88.37
+
+; [HA_Head_Nodes]
+; 194.58.92.102
+; 80.78.253.228
+; 194.67.92.198
+
+; [kha:children]
+; HA_Head_Nodes
+
+
+; [local]
+; devel-lxd01 ansible_connection=local
+
+; [lxd02]
+; devel-lxd02 ansible_host=151.248.120.232
+
+; [containers]
+; devel-lxd01 ansible_host=local
+; devel-lxd02k ansible_host=151.248.120.232
+
+; [keepalived_Nginx]
+; Nginx  ansible_host=185.46.10.149
+; Nginx-bak ansible_host=80.78.240.233
+
+[all:vars]
 ansible_python_interpreter=/usr/bin/python3

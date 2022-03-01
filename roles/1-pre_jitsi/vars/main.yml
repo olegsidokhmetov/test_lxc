@@ -1,0 +1,80 @@
+---
+#NEW_INSTALL=true/false
+
+# Canceled jitsi-bak
+
+# if secondary_nic is true add new nic eth1 (default nic is eth0)
+# secondary_nic: true
+# lxc config device add js-cliente eth1 nic name=eth1 nictype=bridged parent=br1
+# See task 3 - .
+
+# No config proxy for PRO
+
+# Step 3.1 comment because is not necessary in production servers (uncamment fort copy in pub_keys in other server)
+
+#Container 1
+containers:
+ - name: js-alcanteradexuquer001
+   nics: 1nic
+   ctip: 192.172.201.209                     #aded 21/02/2022
+   ctgw: 192.172.201.1                       #aded 21/02/2022
+   mask: 24
+   ipkeep: 172.16.3.43/24
+   keeptype: BACKUP
+   source: local
+   template: js-template
+   service: jitsi
+   node: devel-lxd01
+   file_netplan: 50-cloud-init.yaml
+   ethernet_eth: eth1                        #aded 21/02/2022
+
+#Container 1-back
+ - name: js-alcanteradexuquer001-bak
+   nics: 1nic
+   ctip: 192.172.201.210                     #aded 21/02/2022
+   ctgw: 192.172.201.1                       #aded 21/02/2022
+   mask: 24
+   ipkeep: 172.16.3.43/24
+   keeptype: BACKUP2
+   source: local
+   template: js-template
+   service: jitsi
+   node: devel-lxd02
+   file_netplan: 50-cloud-init.yaml
+   ethernet_eth: eth1                        #aded 21/02/2022
+
+#Keepalived interface (It can be also eth0 for example)
+keepalived_interface: eth1                  #aded 22/02/2022
+
+#DNS of LXC container
+lxc_CT_DNS1: 208.67.222.222                  #Using in file 1nic.yml.j2 and etc.
+lxc_CT_DNS2: 208.67.220.220                  #Using in file 1nic.yml.j2 and etc.
+
+#Configeration data for keepalived
+VRRP1: 1                                     ##Using in file BACKUP.yml.j2 and etc.
+Virtual_id_51: 51                            ##Using in file BACKUP.yml.j2 and etc.
+
+#Owners of files
+owner_id: root                               #aded 21/02/2022
+group_id: root                               #aded 21/02/2022
+
+#Container or server with Ansible
+lxc_master_server: Ansible
+
+#LXC profiles if you use "lxd_container" ansible module
+# lxc_profiles_mini: "['mini']"
+# lxc_profiles_small: "['small']"
+# lxc_profiles_medium: "['medium']"
+# lxc_profiles_default: "['default']"
+
+#LXC profiles if you use "command or shell" ansible module
+lxc_profiles_mini: mini
+lxc_profiles_small: small
+lxc_profiles_medium: medium
+lxc_profiles_default: default
+
+#Variable con valores (master / backup). Únicamente se podrán utilizar esos dos parametros.
+#lxc_CT_TYPE: master
+
+#ip flotante para la configuración de keepalived
+#lxc_IP_FLOAT: 172.16.3.54

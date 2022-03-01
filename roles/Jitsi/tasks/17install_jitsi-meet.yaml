@@ -1,4 +1,0 @@
-    - name: "install jitsi-meet"
-      apt: 
-        name:
-        - jitsi-meet

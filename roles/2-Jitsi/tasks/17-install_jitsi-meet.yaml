@@ -1,0 +1,4 @@
+    - name: №17 "install jitsi-meet"
+      apt: 
+        name:
+        - jitsi-meet
